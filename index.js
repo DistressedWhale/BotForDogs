@@ -16,17 +16,21 @@ app.set("port", (process.env.PORT || 5000));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+
+let token = "ENTER YOUR API TOKEN HERE"
+let verifyToken = "ENTER YOUR VERIFY TOKEN HERE"
+
 //The webpage itself
 app.get("/", function(req, res) {
   res.send("Hi, this is a facebook chatbot hosted on heroku. Try it at {Link to your facebook page here}}")
 });
 
-let token = "API Token"
+
 
 //Facebook
 //check password is correct
 app.get("/webhook/", function(req, res) {
-  if (req.query["hub.verify_token"] === "Verify Token") {
+  if (req.query["hub.verify_token"] === verifyToken) {
     res.send(req.query["hub.challenge"])
   }
   res.send("Wrong token")
