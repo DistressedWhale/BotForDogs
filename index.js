@@ -16,6 +16,26 @@ app.set("port", (process.env.PORT || 5000));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+const eightBallResponses = [ "It is certain,",
+"It is decidedly so",
+"Without a doubt", 
+"Yes definitely",
+"You may rely on it",
+"As I see it, yes",
+"Most likely",
+"Outlook good",
+"Yep",
+"Signs point to yes",
+"Reply hazy try again",
+"Ask again later",
+"Better not tell you now",
+"Cannot predict now",
+"Concentrate and ask again Don't count on it",
+"My reply is no",
+"My sources say no",
+"Outlook not so good",
+"Very doubtful"
+];
 
 let token = "ENTER YOUR API TOKEN HERE"
 let verifyToken = "ENTER YOUR VERIFY TOKEN HERE"
@@ -98,6 +118,10 @@ function getLatestXKCD(sender) {
       sendImage(sender, response.img)
     }
   });
+}
+
+function magic8Ball(sender) {
+  sendText(eightBallResponses[Math.floor(Math.random()*eightBallResponses.length)], sender );
 }
 
 /**
@@ -196,7 +220,10 @@ function responseTriggers(sender, text) {
       } else if (lct.match(/(!xkcd l)|(!xkcd latest)/)) {
         getLatestXKCD(sender);
 
-      } else if (lct.charAt(0) === "!") {
+      } else if (lct.match(/(!ask)|(!8ball) .+/) {
+        magic8Ball(sender)
+      }      
+      else if (lct.charAt(0) === "!") {
         sendText(sender, "I'm not sure what you mean")
       }
   }
