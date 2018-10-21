@@ -2,8 +2,6 @@
 
 ### A basic facebook chatbot for pictures of dogs, and XKCDs.
 
-Avaliable at: https://facebook.com/PrettyMuchJustDogs
-
 ### Commands
 
 | Command       | Response                                              |
